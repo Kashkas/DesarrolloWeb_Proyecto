@@ -9,7 +9,7 @@ if (!defined('BASEPATH'))
  * Date: 15-11-14
  * Time: 13:21
  */
-class Login extends CI_Model {
+class Login_model extends CI_Model {
 
     var $user = '';
     var $pass = '';
@@ -21,10 +21,13 @@ class Login extends CI_Model {
 
     function get_login($user, $pass) {
         $query = $this->db->get_where('login', array('usuario' => $user, 'password' => $pass));
-        //return $query->result_array();
-
+        //$query->result_array();
+        
         if ($query->num_rows() == 1) {
-            return $query->result_array();
+            $row = $query->row();
+            $usuario = array('user'=>$row->usuario, 'pass'=>$row->password, 'tipo'=>$row->tipo, 'logged'=>true);
+            $this->session->set_userdata($usuario);
+            return true;
         } else {
             return false;
         }
