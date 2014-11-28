@@ -23,7 +23,10 @@ class Inicio extends CI_Controller {
             $this->load->view('template/footer');
         } else {
             $this->load->model('login_model');
-            if($this->login_model->get_login($_POST["username"], $_POST["password"])){
+            $user = $_POST['username'];
+            $pass = $_POST['password'];
+            $validate = $this->login_model->get_login($user, $pass);
+            if($validate){
                 if($this->session->userdata('tipo')==3){
                     redirect('administrador');
                 }else{
@@ -31,7 +34,7 @@ class Inicio extends CI_Controller {
                 }
                 
             }else{
-                redirect('');
+                redirect('alumno');
             }
         }
     }

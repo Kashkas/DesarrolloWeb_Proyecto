@@ -6,12 +6,13 @@ if (!defined('BASEPATH'))
 class Alumno extends CI_Controller {
 
     public function index() {
-
-        $this->load->view('template/header');
-        $this->load->view('alumno');
+        
+        $this->load->model('alumno_model');
+        $data = $this->alumno_model->get_info();
+        
+        $this->load->view('template/header_alumno');
+        $this->load->view('alumno_view', $data);
         $this->load->view('template/footer');
     }
     
 }
-
-?>
