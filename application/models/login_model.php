@@ -16,11 +16,12 @@ class login_model extends CI_Model {
     }
 
     function get_login($user, $pass) {
-        //$querystring = "SELECT * FROM Login WHERE usuario=? and pass=?";
+        $querystring = "SELECT * FROM Login WHERE `usuario`=$user and `pass`=$pass";
         //$query = $this->db->query($querystring, array($user, $pass));
-        $where = array('usuario' => $user, 'pass' => $pass);
-        $query = $this->db->get_where('Login', $where);
+        //$where = array('usuario' => $user, 'pass' => $pass);
+        //$query = $this->db->get_where('Login', $where);
         //$query->result_array();
+        $query = $this->db->query($querystring);
         
         //print_r($query);
         if ($query->num_rows() == 1) {
