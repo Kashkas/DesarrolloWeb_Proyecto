@@ -6,35 +6,34 @@ if (!defined('BASEPATH'))
 class Inicio extends CI_Controller {
 
     public function index() {
-        
+
         $this->load->view('template/header');
-        $this->load->view('login_view');
+        $this->load->view('login/login_view');
         $this->load->view('template/footer');
     }
 
     public function login() {
         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
         $this->form_validation->set_rules('username', 'Usuario', 'required');
-	$this->form_validation->set_rules('password', 'Contraseña', 'required');
-        
+        $this->form_validation->set_rules('password', 'Contraseña', 'required');
+
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('template/header');
-            $this->load->view('login_view');
+            $this->load->view('login/login_view');
             $this->load->view('template/footer');
         } else {
             $this->load->model('login_model');
-            $user = $_POST['username'];
-            $pass = $_POST['password'];
+            $user = $this->input->post('username', true);
+            $pass = $this->input->post('password', true);
             $validate = $this->login_model->get_login($user, $pass);
-            if($validate){
-                if($this->session->userdata('tipo')==3){
+            if ($validate) {
+                if ($this->session->userdata('tipo') == 3) {
                     redirect('administrador');
-                }else{
+                } else {
                     redirect('alumno');
                 }
-                
-            }else{
-                redirect();
+            } else {
+                redirect('login');
             }
         }
     }
