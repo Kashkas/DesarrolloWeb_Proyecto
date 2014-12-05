@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Inicio extends CI_Controller {
 
     public function index() {
-
+        
         $this->load->view('template/header');
         $this->load->view('login_view');
         $this->load->view('template/footer');
@@ -34,7 +34,7 @@ class Inicio extends CI_Controller {
                 }
                 
             }else{
-                redirect('alumno');
+                redirect();
             }
         }
     }

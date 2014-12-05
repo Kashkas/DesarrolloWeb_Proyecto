@@ -5,10 +5,11 @@
             <script src="<?php echo base_url(); ?>jQuery/jquery-2.1.1.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
     </head>
+    <?php //print_r($cursos); ?>
     <body>
-        <div class="container">
-            <div class="div0" style="clear: all" >
-                <img src="<?php echo base_url('img/banner.jpg'); ?>"> 
+        <div class="container" style="width: 100%">
+            <div class="div0" style="clear: all; width: 100%" >
+                <img src="<?php echo base_url('img/banner.jpg'); ?>" style="width:100%; height: 40%"> 
             </div>
             <div class="div1" style="float:left; width:20%">
                 <ul id="sidebar" class="nav nav-pills nav-stacked" style="max-width: 200px;">
@@ -25,11 +26,12 @@
                     <li class="collapse navbar-collapse"><a href="#"><span class="glyphicon glyphicon-lock"></span>  Cursos<b class="caret"></b></a>
                         <ul class="nav navbar-nav collapsed">
                             <li></li>
-                            <?php
-                            echo "<li class='collapse navbar-collapse'>";
-                                echo "prueba";
-                            echo "</li>";
-                            ?>
+                            <?php foreach ($cursos as $row) { ?>
+                                <li class='collapse navbar-collapse'>
+                                    <a href="<?php echo base_url('alumno'); ?>/curso/<?php echo $row['year']; ?>/<?php echo $row['seccion']; ?>/<?php echo $row['codigo']; ?>"/><?php echo $row['nombre']; ?></a>
+                                </li>
+
+                            <?php } ?>
                         </ul>
                     </li>
                     <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>  Mensajes</a></li>
