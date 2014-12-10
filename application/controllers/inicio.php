@@ -12,6 +12,11 @@ class Inicio extends CI_Controller {
         $this->load->view('template/footer');
     }
 
+    public function salir() {
+        $this->session->sess_destroy();
+        redirect(base_url());
+    }
+
     public function login() {
         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
         $this->form_validation->set_rules('username', 'Usuario', 'required');
