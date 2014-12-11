@@ -15,26 +15,30 @@
         <table class="table">
             <thead>
             <th>Documentos</th>
+            <th></th>
             </thead>
             <tbody>
                 <?php
-                echo form_open('documento/descarga', ['class' => 'form-horizontal', 'role' => 'form']);
+                echo form_open('documento/download/' . $info['year'] . '/' . $info['semestre'] . '/' . $info['codigo_asignatura'] . '/' . $info['seccion']);
                 if (is_array($results)) {
                     foreach ($results as $data) {
-                        echo '<td>';
-                        echo form_checkbox($checkboxattr = array(
-                        'name' => $data['id'],
-                        'value' => $data['id'],
-                        'id' => $data['id']
-                        ));
-                        echo '</td>';
-                        echo '<td>';
-                        echo $data['nombre_documento'];
-                        echo '</td>';
+                        ?>
+                        <tr>
+                            <td class="col-md-1">
+                                <?php echo form_checkbox('files[]', $data['id']); ?>
+                            </td>
+                            <td class="col-md-7">
+                                <?php echo $data['nombre_documento']; ?>
+                            </td>
+                        </tr>
+                        <?php
                     }
                 }
-                echo form_close();
+                echo '<tr>';
+                echo '<td><button type="submit" class="btn btn-primary">Descargar</button></td><td></td>';
+                echo '</tr>';
                 ?>
             </tbody>
         </table>
+        <?php echo form_close() ?>
     </div>

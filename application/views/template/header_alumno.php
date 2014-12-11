@@ -2,10 +2,8 @@
     <head>
         <title>Curso</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="<?php echo base_url('bootstrap-table/bootstrap-table.css'); ?>"/>
         <script src="<?php echo base_url(); ?>jQuery/jquery-2.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
-        <script src="<?php echo base_url('bootstrap-table/bootstrap-table.js'); ?>"></script>
     </head>
     <?php //print_r($cursos); ?>
     <body>
