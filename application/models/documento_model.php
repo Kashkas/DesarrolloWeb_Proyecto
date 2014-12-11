@@ -21,6 +21,7 @@ class Documento_model extends CI_Model {
             'tipo_usuario_ingreso' => $tipo,
             'rut_ingreso' => $rut
         );
+        //print_r($data);
         $this->db->insert('Documentos', $data);
     }
 }

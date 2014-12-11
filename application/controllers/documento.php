@@ -10,6 +10,7 @@ class Documento extends CI_Controller {
     }
 
     public function download($year, $semestre, $curso, $seccion) {
+        error_reporting(E_ERROR | E_PARSE);
         $file = $this->input->post('files');
         //print_r($file);
         $download_path = 'files/' . $curso . '/' . $year . '/' . $semestre . '/' . $seccion . '/';
@@ -28,6 +29,7 @@ class Documento extends CI_Controller {
     }
 
     public function upload($year, $semestre, $curso, $seccion) {
+        error_reporting(E_ERROR | E_PARSE);
         $upload_config = array(
             'upload_path' => './files/' . $curso . '/' . $year . '/' . $semestre . '/' . $seccion,
             'allowed_types' => '*',
@@ -62,11 +64,24 @@ class Documento extends CI_Controller {
             $this->documento_model->upload($year, $semestre, $curso, $seccion, $upload_data['file_name']);
                
         }
-        if ($this->session->userdata['tipo'] == 1) {
+        
+        
+        $this->load->model('curso_model');
+        $cursos = $this->curso_model->get_info_cursos_actuales();
+        $this->load->view('template/header_alumno', $cursos);
+        
+        //echo $this->session->userdata['tipo'];
+        $data['info'] = array('year' => $year, 'semestre' => $semestre, 'seccion' => $seccion, 'codigo_asignatura' => $curso);
+        $data['results'] = $this->curso_model->get_documentos($year, $semestre, $curso, $seccion, 1);
+        $this->load->view('alumno/alumno_material_alumnos_view', $data);
+        
+        $this->load->view('template/footer');
+        
+        /*if ($this->session->userdata['tipo'] == 1) {
             redirect('alumno/curso/' . $year . '/' . $semestre . '/', $curso . '/' . $seccion . 'material_alumnos');
         } else {
             redirect('alumno/curso/' . $year . '/' . $semestre . '/', $curso . '/' . $seccion . 'material_docente');
-        }
+        }*/
     }
 
 }
