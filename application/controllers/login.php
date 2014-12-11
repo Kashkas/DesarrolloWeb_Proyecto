@@ -6,18 +6,11 @@ if (!defined('BASEPATH'))
 class Login extends CI_Controller {
 
     public function index() {
-        $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-        $this->form_validation->set_rules('username', 'Usuario', 'required');
-	$this->form_validation->set_rules('password', 'Contraseña', 'required');
+        $data = array('error' => true);
         
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('template/header');
-            $this->load->view('login_view');
-            $this->load->view('template/footer');
-        } else {
-            
-            redirect('');
-        }
+        $this->load->view('template/header');
+        $this->load->view('login/login_view', $data);
+        $this->load->view('template/footer');
     }
 
 }

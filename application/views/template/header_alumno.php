@@ -2,8 +2,10 @@
     <head>
         <title>Curso</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="<?php echo base_url('bootstrap-table/bootstrap-table.css'); ?>"/>
         <script src="<?php echo base_url(); ?>jQuery/jquery-2.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+        <script src="<?php echo base_url('bootstrap-table/bootstrap-table.js'); ?>"></script>
     </head>
     <?php //print_r($cursos); ?>
     <body>
@@ -23,21 +25,18 @@
                     <li class="collapse navbar-collapse"><a href="#"><span class="glyphicon glyphicon-lock"></span>  Cursos<b class="caret"></b></a>
                         <ul class="nav navbar-nav collapsed">
                             <?php foreach ($cursos as $row) { ?>
-                                <li class='collapse navbar-collapse'>
-                                    <a href="<?php echo base_url('alumno'); ?>/curso/<?php echo $row['year']; ?>/<?php echo $row['seccion']; ?>/<?php echo $row['codigo']; ?>"/><?php echo $row['nombre']; ?></a>
+                                <li class='nav navbar-nav navbar-collapsed'>
+                                    <a href="<?php echo base_url('alumno'); ?>/curso/<?php echo $row['year']; ?>/<?php echo $row['semestre']; ?>/<?php echo $row['codigo']; ?>/<?php echo $row['seccion']; ?>/"/><?php echo $row['nombre']; ?></a>
                                 </li>
 
                             <?php } ?>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-envelope"></span>  Mensajes</a>
-                    </li>
-                    <li>
                         <a href="#"><span class="glyphicon glyphicon-list"></span>  Horario</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>">Enlaces</a>
+                        <a href="<?php echo base_url(); ?>"><span class="glyphicon glyphicon-link"></span>Enlaces</a>
                     </li>
                     <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>  Contacts</a></li>
                 </ul>

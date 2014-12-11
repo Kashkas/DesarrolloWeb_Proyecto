@@ -16,17 +16,15 @@ class login_model extends CI_Model {
     }
 
     function get_login($user, $pass) {
-        $querystring = "SELECT * FROM `Login` WHERE `usuario`='$user' and `pass`='$pass';";
-        //$query = $this->db->query($querystring, array($user, $pass));
-        $where = array('usuario' => $user, 'pass' => $pass);
-        $query = $this->db->get_where('Login', $where);
-        //$query->result_array();
-        //$query = $this->db->query($querystring);
         
-        //print_r($query);
+        $this->db->select('*');
+        $this->db->from('Login');
+        $this->db->where(array('usuario' => $user, 'pass' => $pass));
+        $query = $this->db->get();
+        
         if ($query->num_rows() == 1) {
             $row = $query->row();
-            $usuario = array('user'=>$row->usuario, 'pass'=>$row->pass, 'tipo'=>$row->tipo, 'logged'=>true, 'rut'=>$row->rut, 'dv'=>$row->dv);
+            $usuario = array('user'=>$row->usuario, 'pass'=>$row->pass, 'tipo'=>$row->tipo, 'logged'=>true, 'rut'=>$row->rut, 'dv'=>$row->dv, );
             $this->session->set_userdata($usuario);
             return true;
         } else {
