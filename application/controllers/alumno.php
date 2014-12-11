@@ -102,13 +102,14 @@ class Alumno extends CI_Controller {
     
     public function material_docente($year, $semestre, $curso, $seccion) {
         $data['info'] = array('year' => $year, 'semestre' => $semestre, 'seccion' => $seccion, 'codigo_asignatura' => $curso);
-        $data['results'] = $this->curso_model->get_documentos($year, $semestre, $curso, $seccion);
+        $data['results'] = $this->curso_model->get_documentos($year, $semestre, $curso, $seccion, 2);
         $this->load->view('alumno/alumno_material_docente_view', $data);
         
     }
     
     public function material_alumnos($year, $semestre, $curso, $seccion) {
         $data['info'] = array('year' => $year, 'semestre' => $semestre, 'seccion' => $seccion, 'codigo_asignatura' => $curso);
+        $data['results'] = $this->curso_model->get_documentos($year, $semestre, $curso, $seccion, 1);
         $this->load->view('alumno/alumno_material_alumnos_view', $data);
         
     }

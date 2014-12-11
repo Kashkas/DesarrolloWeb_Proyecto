@@ -14,27 +14,58 @@
     <div class="col-md-7">
         <table class="table">
             <thead>
-            <th>Documentos</th>
+            <th>Documentos</th><th></th>
             </thead>
             <tbody>
                 <?php
-                echo form_open('documento/descarga/'.$info['year'].'/'.$info['semestre'].'/'.$info['codigo_asignatura'].'/'.$info['seccion'].'tipo', ['class' => 'form-horizontal', 'role' => 'form']);
+                echo form_open('documento/download/' . $info['year'] . '/' . $info['semestre'] . '/' . $info['codigo_asignatura'] . '/' . $info['seccion']);
                 if (is_array($results)) {
                     foreach ($results as $data) {
-                        echo '<td>';
-                        echo form_checkbox($checkboxattr = array(
-                        'name' => $data['id'],
-                        'value' => $data['id'],
-                        'id' => $data['id']
-                        ));
-                        echo '</td>';
-                        echo '<td>';
-                        echo $data['nombre_documento'];
-                        echo '</td>';
+                        ?>
+                        <tr>
+                            <td class="col-md-1">
+                                <?php echo form_checkbox('files[]', $data['nombre_documento']); ?>
+                            </td>
+                            <td class="col-md-7">
+                                <?php echo $data['nombre_documento']; ?>
+                            </td>
+                        </tr>
+                        <?php
                     }
                 }
-                echo form_close();
+                echo '<tr>';
+                echo '<td><button type="submit" class="btn btn-primary">Descargar</button></td><td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload">
+            Subir Archivo
+        </button></td>';
+                echo '</tr>';
                 ?>
             </tbody>
         </table>
+        <?php echo form_close() ?>
+        
+        <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Nueva Noticia</h4>
+                    </div>
+                    <div class="modal-body">
+                        <?php echo form_open_multipart('documento/upload' .'/'. $info['year'] . '/' . $info['semestre'] . '/' . $info['codigo_asignatura'] . '/' . $info['seccion'], ['class' => 'form-horizontal', 'role' => 'form']); ?>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="titulo">Archivo:</label>
+                            <div class="col-md-4">
+                                <input type="file" size="40" id="archivo" name="archivo"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Subir</button>
+                    </div>
+                    <?php echo form_close(); ?>
+                </div>
+            </div>
+        </div>
+        
     </div>

@@ -84,11 +84,11 @@ class Curso_model extends CI_Model {
         return $data;
     }
     
-    public function get_documentos($year, $semestre, $curso, $seccion) {
+    public function get_documentos($year, $semestre, $curso, $seccion, $tipo) {
         $rut = $this->session->userdata('rut');
         $this->db->select('*');
         $this->db->from('Documentos');
-        $this->db->where(array('year' => $year, 'semestre' => $semestre, 'seccion' => $seccion, 'codigo_asignatura' => $curso));
+        $this->db->where(array('year' => $year, 'semestre' => $semestre, 'seccion' => $seccion, 'codigo_asignatura' => $curso, 'tipo_usuario_ingreso' => $tipo));
         $query = $this->db->get();
         
         $data = $query->result_array();

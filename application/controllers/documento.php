@@ -34,8 +34,9 @@ class Documento extends CI_Controller {
             'max_size' => '5000'
         );
         $this->load->library('upload', $upload_config);
+        $this->upload->initialize($upload_config);
 
-        if (!$this->upload->do_upload()) {
+        if (!$this->upload->do_upload('archivo')) {
             // upload failed
             return array('error' => $this->upload->display_errors('<span>', '</span>'));
         } else {
@@ -54,7 +55,12 @@ class Documento extends CI_Controller {
             if (!is_dir('/files/' . $curso . '/' . $year . '/' . $semestre . '/' . $seccion)) {
                 mkdir('./files/' . $curso . '/' . $year . '/' . $semestre . '/' . $seccion, 0777, true);
             }
+            
             $upload_data = $this->upload->data();
+            //print_r($upload_data);
+            $this->load->model('documento_model');
+            $this->documento_model->upload($year, $semestre, $curso, $seccion, $upload_data['file_name']);
+               
         }
         if ($this->session->userdata['tipo'] == 1) {
             redirect('alumno/curso/' . $year . '/' . $semestre . '/', $curso . '/' . $seccion . 'material_alumnos');
