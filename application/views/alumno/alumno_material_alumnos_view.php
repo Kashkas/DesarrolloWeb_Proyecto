@@ -18,7 +18,7 @@
             </thead>
             <tbody>
                 <?php
-                echo form_open('documento/download/' . $info['year'] . '/' . $info['semestre'] . '/' . $info['codigo_asignatura'] . '/' . $info['seccion']);
+                echo form_open('documento/download/' . $info['year'] . '/' . $info['semestre'] . '/' . $info['codigo_asignatura'] . '/' . $info['seccion'].'/material_alumnos');
                 if (is_array($results)) {
                     foreach ($results as $data) {
                         ?>

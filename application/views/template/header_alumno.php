@@ -36,6 +36,9 @@
                     <li>
                         <a href="<?php echo base_url(); ?>"><span class="glyphicon glyphicon-link"></span>Enlaces</a>
                     </li>
-                    <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>  Contacts</a></li>
+                    <li><a href="mailto:juan.ramirezb@mail.udp.cl"><span class="glyphicon glyphicon-earphone"></span>  Contacto</a></li>
+                    <li>
+                        <a href="<?php echo base_url('inicio/salir'); ?>"><span class="glyphicon glyphicon-off"></span>  Salir</a>
+                    </li>
                 </ul>
             </div>

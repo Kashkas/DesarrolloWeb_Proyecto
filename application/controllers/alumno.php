@@ -42,7 +42,7 @@ class Alumno extends CI_Controller {
         $this->load->view('template/footer');
     }
     
-    public function noticias($year, $semestre, $curso, $seccion) {
+    public function noticias($year, $semestre, $curso, $seccion, $num = 0) {
         
         $this->load->library('pagination');
         $config = array();
@@ -87,7 +87,7 @@ class Alumno extends CI_Controller {
     }
     
     public function foro($year, $semestre, $curso, $seccion) {
-        $data['info'] = array('year' => $year, 'semestre' => $semestre, 'seccion' => $seccion, 'codigo_asignatura' => $curso);
+        $data['info'] = array('year' => $year, 'semestre' => $semestre, 'seccion' => $seccion, 'codigo_asignatura' => $curso, 'numero' => $num);
         $this->load->view('alumno/alumno_foro_view', $data);
         
     }
