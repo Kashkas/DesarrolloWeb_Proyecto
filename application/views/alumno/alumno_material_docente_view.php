@@ -25,7 +25,7 @@
                         ?>
                         <tr>
                             <td class="col-md-1">
-                                <?php echo form_checkbox('files[]', $data['id']); ?>
+                                <?php echo form_checkbox('files[]', $data['nombre_documento']); ?>
                             </td>
                             <td class="col-md-7">
                                 <?php echo $data['nombre_documento']; ?>

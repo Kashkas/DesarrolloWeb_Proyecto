@@ -10,12 +10,21 @@ class Documento extends CI_Controller {
     }
 
     public function download($year, $semestre, $curso, $seccion) {
-        //$rut = $this->session->userdata('rut');
-        $file = $this->input->post('archivo');
-        $download_path = './files/' . $curso . '/' . $year . '/' . $semestre . '/' . $seccion;
+        $file = $this->input->post('files');
+        //print_r($file);
+        $download_path = 'files/' . $curso . '/' . $year . '/' . $semestre . '/' . $seccion . '/';
         $this->load->helper('download');
-        $data = file_get_contents($download_path.'/'.$file);
-        force_download($file, $data);
+        $this->load->library('zip');
+        foreach ($file as $archivo) {
+            $this->zip->add_data($archivo, $download_path . $archivo);
+        }
+        $fecha = gmdate('d-m-Y');
+        //echo $download_path;
+        $this->zip->archive($download_path . $curso . '-material_docente-' . $fecha . '.zip');
+        $data = file_get_contents(base_url().$download_path . $curso . '_material_docente-' . $fecha . '.zip');
+        //$data = base_url().$download_path . $curso . '_material_docente-' . $fecha . '.zip';
+        $name = $curso . '-material_docente-' . $fecha . '.zip';
+        force_download($name, $data);
     }
 
     public function upload($year, $semestre, $curso, $seccion) {
@@ -47,10 +56,10 @@ class Documento extends CI_Controller {
             }
             $upload_data = $this->upload->data();
         }
-        if($this->session->userdata['tipo']==1){
-            redirect('alumno/curso/'.$year.'/'.$semestre.'/',$curso.'/'.$seccion.'material_alumnos');
-        }else{
-            redirect('alumno/curso/'.$year.'/'.$semestre.'/',$curso.'/'.$seccion.'material_docente');
+        if ($this->session->userdata['tipo'] == 1) {
+            redirect('alumno/curso/' . $year . '/' . $semestre . '/', $curso . '/' . $seccion . 'material_alumnos');
+        } else {
+            redirect('alumno/curso/' . $year . '/' . $semestre . '/', $curso . '/' . $seccion . 'material_docente');
         }
     }
 
